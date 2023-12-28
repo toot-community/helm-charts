@@ -54,9 +54,6 @@ redis:
   auth:
     enabled: false
     sentinel: false
-  master:
-    persistence:
-      enabled: false
   replica:
     replicaCount: 3
   sentinel:
