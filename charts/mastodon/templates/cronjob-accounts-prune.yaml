@@ -1,0 +1,45 @@
+{{ if .Values.jobs.accountsPrune.enabled }}
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ include "mastodon.fullname" . }}-accounts-prune
+  labels:
+    {{- include "mastodon.labels" . | nindent 4 }}
+spec:
+  schedule: {{ .Values.jobs.accountsPrune.schedule | quote }}
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          name: {{ include "mastodon.fullname" . }}-accounts-prune
+          {{- with .Values.jobs.annotations }}
+          annotations:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+        spec:
+          restartPolicy: Never
+          serviceAccountName: {{ include "mastodon.serviceAccountName" . }}
+          containers:
+            - name: accounts-prune
+              image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+              imagePullPolicy: {{ .Values.image.pullPolicy }}
+              command:
+                - bash
+                - -c
+                - "bin/tootctl accounts prune"
+              envFrom:
+                - configMapRef:
+                    name: {{ include "mastodon.fullname" . }}-env
+                - secretRef:
+                    name: {{ include "mastodon.fullname" . }}-secrets-env
+              {{- if .Values.configuration.search.enabled }}
+              env:
+                - name: ES_PASS
+                  valueFrom:
+                    secretKeyRef:
+                      key: {{ .Values.configuration.search.password.secretKeyRef.key }}
+                      name: {{ .Values.configuration.search.password.secretKeyRef.name }}
+              {{- end }}
+              resources:
+                {{- toYaml .Values.jobs.accountsPrune.resources | nindent 16 }}
+{{ end }}

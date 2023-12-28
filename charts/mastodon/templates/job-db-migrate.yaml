@@ -1,0 +1,47 @@
+{{ if .Values.configuration.database.runDatabaseMigrations | default false }}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ include "mastodon.fullname" . }}-db-migrate
+  labels:
+    {{- include "mastodon.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": post-install,pre-upgrade
+    "helm.sh/hook-delete-policy": before-hook-creation,hook-succeeded
+    "helm.sh/hook-weight": "-2"
+spec:
+  template:
+    metadata:
+      name: {{ include "mastodon.fullname" . }}-db-migrate
+      {{- with .Values.jobs.annotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: {{ include "mastodon.fullname" . }}-db-migrate
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command:
+            - bundle
+            - exec
+            - rake
+            - db:migrate
+          env:
+            - name: DB_PORT
+              value: {{ .Values.configuration.database.dbMigrations.port | quote }}
+            - name: DB_NAME
+              value: {{ .Values.configuration.database.dbMigrations.name }}
+            - name: DB_HOST
+              value: {{ .Values.configuration.database.dbMigrations.host }}
+          envFrom:
+            - configMapRef:
+                name: {{ include "mastodon.fullname" . }}-env
+            - secretRef:
+                name: {{ include "mastodon.fullname" . }}-secrets-env
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      serviceAccountName: {{ include "mastodon.serviceAccountName" . }}
+      terminationGracePeriodSeconds: 30
+{{ end }}
