@@ -12,5 +12,5 @@ dependencies:
     version: 1.17.5
     condition: haproxy.enabled
   - name: redis
-    version: 17.4.2
+    version: 17.17.1
     repository: https://charts.bitnami.com/bitnami
