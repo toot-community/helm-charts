@@ -11,6 +11,7 @@ metadata:
   {{- end }}
   name: {{ include "mastodon.fullname" . }}-streaming
 spec:
+  replicas: {{ .Values.streaming.replicaCount | default 3 }}
   selector:
     matchLabels:
       {{- include "mastodon.selectorLabels" . | nindent 6 }}
