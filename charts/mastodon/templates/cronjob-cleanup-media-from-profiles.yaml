@@ -34,14 +34,24 @@ spec:
                     name: {{ include "mastodon.fullname" . }}-env
                 - secretRef:
                     name: {{ include "mastodon.fullname" . }}-secrets-env
-              {{- if .Values.configuration.search.enabled }}
               env:
+              {{- if .Values.configuration.search.enabled }}
                 - name: ES_PASS
                   valueFrom:
                     secretKeyRef:
                       key: {{ .Values.configuration.search.password.secretKeyRef.key }}
                       name: {{ .Values.configuration.search.password.secretKeyRef.name }}
               {{- end }}
+                - name: DB_USER
+                  valueFrom:
+                    secretKeyRef:
+                      key: {{ .Values.configuration.database.credentials.existingSecret.usernameKey }}
+                      name: {{ .Values.configuration.database.credentials.existingSecret.name }}
+                - name: DB_PASS
+                  valueFrom:
+                    secretKeyRef:
+                      key: {{ .Values.configuration.database.credentials.existingSecret.passwordKey }}
+                      name: {{ .Values.configuration.database.credentials.existingSecret.name }}
               resources:
                 {{- toYaml .Values.jobs.cleanupMediaProfiles.resources | nindent 16 }}
 {{ end }}

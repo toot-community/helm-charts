@@ -54,13 +54,13 @@ spec:
             - name: DB_USER
               valueFrom:
                 secretKeyRef:
-                  key: DB_USER
-                  name: {{ include "mastodon.fullname" . }}-secrets-env
+                  key: {{ .Values.configuration.database.credentials.existingSecret.usernameKey }}
+                  name: {{ .Values.configuration.database.credentials.existingSecret.name }}
             - name: DB_PASS
               valueFrom:
                 secretKeyRef:
-                  key: DB_PASS
-                  name: {{ include "mastodon.fullname" . }}-secrets-env
+                  key: {{ .Values.configuration.database.credentials.existingSecret.passwordKey }}
+                  name: {{ .Values.configuration.database.credentials.existingSecret.name }}
             - name: PORT
               value: "4000"
             - name: DB_SSLMODE

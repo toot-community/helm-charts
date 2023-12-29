@@ -52,6 +52,16 @@ spec:
           env:
             - name: DB_POOL
               value: {{ .concurrency | quote }}
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  key: {{ context.Values.configuration.database.credentials.existingSecret.usernameKey }}
+                  name: {{ context.Values.configuration.database.credentials.existingSecret.name }}
+            - name: DB_PASS
+              valueFrom:
+                secretKeyRef:
+                  key: {{ context.Values.configuration.database.credentials.existingSecret.passwordKey }}
+                  name: {{ context.Values.configuration.database.credentials.existingSecret.name }}
             {{- if $context.Values.configuration.search.enabled }}
             - name: ES_PASS
               valueFrom:
