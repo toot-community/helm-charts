@@ -35,6 +35,16 @@ spec:
               value: {{ .Values.configuration.database.dbMigrations.name }}
             - name: DB_HOST
               value: {{ .Values.configuration.database.dbMigrations.host }}
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  key: {{ .Values.configuration.database.credentials.existingSecret.usernameKey }}
+                  name: {{ .Values.configuration.database.credentials.existingSecret.name }}
+            - name: DB_PASS
+              valueFrom:
+                secretKeyRef:
+                  key: {{ .Values.configuration.database.credentials.existingSecret.passwordKey }}
+                  name: {{ .Values.configuration.database.credentials.existingSecret.name }}
           envFrom:
             - configMapRef:
                 name: {{ include "mastodon.fullname" . }}-env
