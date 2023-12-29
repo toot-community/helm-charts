@@ -46,13 +46,13 @@ spec:
             - name: DB_USER
               valueFrom:
                 secretKeyRef:
-                  key: {{ .Values.configuration.database.credentials.existingSecret.usernameKey }}
-                  name: {{ .Values.configuration.database.credentials.existingSecret.name }}
+                  key: {{ .Values.configuration.database.credentials.usernameKey }}
+                  name: {{ .Values.configuration.database.credentials.secretName }}
             - name: DB_PASS
               valueFrom:
                 secretKeyRef:
-                  key: {{ .Values.configuration.database.credentials.existingSecret.passwordKey }}
-                  name: {{ .Values.configuration.database.credentials.existingSecret.name }}
+                  key: {{ .Values.configuration.database.credentials.passwordKey }}
+                  name: {{ .Values.configuration.database.credentials.secretName }}
             {{- if .Values.configuration.search.enabled }}
             - name: ES_PASS
               valueFrom:
