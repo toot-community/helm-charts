@@ -51,6 +51,12 @@ data:
   {{- if .Values.streaming.baseURL }}
   STREAMING_API_BASE_URL: {{ .Values.streaming.baseURL }}
   {{- end }}
+  {{- if .Values.configuration.authorizedFetch }}
+  AUTHORIZED_FETCH: "true"
+  {{- end }}
+  {{- if .Values.configuration.limitedFederationMode }}
+  LIMITED_FEDERATION_MODE: "true"
+  {{- end }}
 kind: ConfigMap
 metadata:
   labels:
