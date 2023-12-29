@@ -6,7 +6,6 @@ data:
   DB_PORT: {{ .Values.configuration.database.port | quote }}
   DB_SSLMODE: {{ .Values.configuration.database.sslmode }}
   DEFAULT_LOCALE: {{ .Values.configuration.defaultLocale }}
-  ES_ENABLED: "false"
   LOCAL_DOMAIN: {{ .Values.configuration.localDomain }}
   MALLOC_ARENA_MAX: "2"
   NODE_ENV: production
