@@ -46,11 +46,6 @@ spec:
               value: empty
             {{- end }}
             {{- end }}
-            - name: REDIS_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  key: REDIS_PASSWORD
-                  name: {{ include "mastodon.fullname" . }}-secrets-env
             - name: DB_USER
               valueFrom:
                 secretKeyRef:
