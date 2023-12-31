@@ -32,10 +32,8 @@ spec:
           - ./streaming
           env:
             {{- if .Values.configuration.databaseReplicas.enabled }}
-            {{- with (first .Values.configuration.databaseReplicas.hosts) }}
             - name: DB_HOST
-              value: {{ . }}
-            {{- end }}
+              value: .Values.configuration.databaseReplicas.host
             {{- end }}
             {{- if .Values.streaming.redis }}
             {{- if .Values.streaming.redis.url }}

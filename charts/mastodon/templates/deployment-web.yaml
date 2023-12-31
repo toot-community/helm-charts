@@ -73,14 +73,6 @@ spec:
             - containerPort: 3000
               name: http
               protocol: TCP
-          {{- if .Values.configuration.databaseReplicas }}
-          {{- if .Values.configuration.databaseReplicas.enabled }}
-          volumeMounts:
-            - name: db-config-override
-              mountPath: /opt/mastodon/config/database.yml
-              subPath: database.yml
-          {{- end }}
-          {{- end }}
           readinessProbe:
             {{- toYaml .Values.web.readinessProbe | nindent 12 }}
           startupProbe:
@@ -94,11 +86,3 @@ spec:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       serviceAccountName: {{ include "mastodon.serviceAccountName" . }}
       terminationGracePeriodSeconds: 30
-      {{- if .Values.configuration.databaseReplicas }}
-      {{- if .Values.configuration.databaseReplicas.enabled }}
-      volumes:
-        - name: db-config-override
-          configMap:
-            name: {{ include "mastodon.fullname" . }}-db-config-override
-      {{- end }}
-      {{- end }}

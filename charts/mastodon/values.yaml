@@ -40,8 +40,8 @@ configuration:
     runDatabaseMigrations: true
   databaseReplicas:
     enabled: false
-    hosts:
-      - private-db-postgresql-ams3-toot-community-ro-0-do-user-924064-0.b.db.ondigitalocean.com
+    host: private-db-postgresql-ams3-toot-community-ro-0-do-user-924064-0.b.db.ondigitalocean.com
+    port: 5432
   defaultLocale: en
   localDomain: toot.community
   allowedPrivateAddresses: 10.245.0.0/16

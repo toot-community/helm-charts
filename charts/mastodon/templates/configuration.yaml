@@ -5,6 +5,10 @@ data:
   DB_POOL: {{ .Values.configuration.database.poolsize | quote }}
   DB_PORT: {{ .Values.configuration.database.port | quote }}
   DB_SSLMODE: {{ .Values.configuration.database.sslmode }}
+  {{- if .Values.configuration.databaseReplicas.enabled }}
+  REPLICA_DB_HOST: {{ .Values.configuration.databaseReplicas.host }}
+  REPLICA_DB_PORT: {{ .Values.configuration.databaseReplicas.port | quote }}
+  {{- end }}
   DEFAULT_LOCALE: {{ .Values.configuration.defaultLocale }}
   LOCAL_DOMAIN: {{ .Values.configuration.localDomain }}
   MALLOC_ARENA_MAX: "2"
