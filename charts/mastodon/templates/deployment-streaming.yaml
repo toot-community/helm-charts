@@ -33,7 +33,7 @@ spec:
           env:
             {{- if .Values.configuration.databaseReplicas.enabled }}
             - name: DB_HOST
-              value: .Values.configuration.databaseReplicas.host
+              value: {{ .Values.configuration.databaseReplicas.host }}
             {{- end }}
             {{- if .Values.streaming.redis }}
             {{- if .Values.streaming.redis.url }}
