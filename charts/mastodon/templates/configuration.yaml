@@ -60,6 +60,9 @@ data:
   {{- if .Values.configuration.limitedFederationMode }}
   LIMITED_FEDERATION_MODE: "true"
   {{- end }}
+  {{- if .Values.configuration.trustedProxyIPs }}
+  TRUSTED_PROXY_IP: {{ .Values.configuration.trustedProxyIPs }}
+  {{- end }}
 kind: ConfigMap
 metadata:
   labels:
