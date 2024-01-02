@@ -4,14 +4,14 @@ kind: Ingress
 metadata:
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-production
-    {{- if .Values.ingress.streaming.useFastlyIP.enabled }}
+    # {{- if .Values.ingress.streaming.useFastlyIP.enabled }}
     nginx.ingress.kubernetes.io/configuration-snippet: |
         set $new_client_ip $remote_addr;
         if ($http_fastly_client_ip != "") {
           set $new_client_ip $http_fastly_client_ip;
         }
         proxy_set_header X-Real-IP $new_client_ip;
-    {{- end }}
+    # {{- end }}
   labels:
     {{- include "mastodon.labels" . | nindent 4 }}
   name: {{ $fullName }}-streaming
