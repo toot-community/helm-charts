@@ -4,7 +4,7 @@ kind: Ingress
 metadata:
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-production
-    {{- if .Values.ingress.web.useFastlyIP.enabled }}
+    {{- if .Values.ingress.streaming.useFastlyIP.enabled }}
     nginx.ingress.kubernetes.io/configuration-snippet: |
         set $new_client_ip $remote_addr;
         if ($http_fastly_client_ip != "") {
