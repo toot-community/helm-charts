@@ -9,8 +9,9 @@ metadata:
         set $new_client_ip $remote_addr;
         if ($http_fastly_client_ip != "") {
           set $new_client_ip $http_fastly_client_ip;
+          proxy_set_header X-Real-IP $new_client_ip;
+          proxy_set_header X-Forwarded-For $new_client_ip;
         }
-        proxy_set_header X-Real-IP $new_client_ip;
     # {{- end }}
   labels:
     {{- include "mastodon.labels" . | nindent 4 }}
