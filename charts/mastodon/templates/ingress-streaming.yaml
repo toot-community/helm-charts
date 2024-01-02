@@ -11,7 +11,7 @@ metadata:
           set $new_client_ip $http_fastly_client_ip;
         }
         proxy_set_header X-Real-IP $new_client_ip;
-    {{- end -}}
+    {{- end }}
   labels:
     {{- include "mastodon.labels" . | nindent 4 }}
   name: {{ $fullName }}-streaming
