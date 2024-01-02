@@ -15,6 +15,14 @@ metadata:
     nginx.ingress.kubernetes.io/auth-tls-verify-client: "on"
     nginx.ingress.kubernetes.io/auth-tls-pass-certificate-to-upstream: "false"
     {{- end }}
+    {{- if .Values.ingress.web.useFastlyIP.enabled }}
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+        set $new_client_ip $remote_addr;
+        if ($http_fastly_client_ip != "") {
+          set $new_client_ip $http_fastly_client_ip;
+        }
+        proxy_set_header X-Real-IP $new_client_ip;
+    {{- end -}}
   labels:
     {{- include "mastodon.labels" . | nindent 4 }}
   name: {{ $fullName }}-web
