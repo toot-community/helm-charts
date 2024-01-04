@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: ConfigMap
+data:
+  HOSTNAME: {{ .Values.aoderelay.hostname }}
+  ADDR: {{ .Values.aoderelay.address }}
+  PORT: {{ .Values.aoderelay.port | quote }}
+  DEBUG: {{ .Values.aoderelay.debug | quote }}
+  RESTRICTED_MODE: {{ .Values.aoderelay.restrictedMode | quote }}
+  VALIDATE_SIGNATURES: {{ .Values.aoderelay.validateSignatures | quote }}
+  HTTPS: {{ .Values.aoderelay.https | quote }}
+  PRETTY_LOG: {{ .Values.aoderelay.prettyLog | quote }}
+  PUBLISH_BLOCKS: {{ .Values.aoderelay.publishBlocks | quote }}
+  SLED_PATH: {{ .Values.aoderelay.sledPath }}
+  RUST_LOG: {{ .Values.aoderelay.rustLog }}
+  FOOTER_BLURB: {{ .Values.aoderelay.footerBlurb }}
+  LOCAL_DOMAINS: {{ .Values.aoderelay.localDomains }}
+  LOCAL_BLURB: {{ .Values.aoderelay.localBlurb }}
+  {{- if .Values.aoderelay.prometheusEndpoint }}
+  {{- if .Values.aoderelay.prometheusEndpoint.enabled }}
+  PROMETHEUS_ADDR: {{ .Values.aoderelay.prometheusEndpoint.address }}
+  PROMETHEUS_PORT: {{ .Values.aoderelay.prometheusEndpoint.port | quote }}
+  {{- end }}
+  {{- end }}
+metadata:
+  labels:
+    {{- include "aoderelay.labels" . | nindent 4 }}
+  name: {{ include "aoderelay.fullname" . }}-config
+
