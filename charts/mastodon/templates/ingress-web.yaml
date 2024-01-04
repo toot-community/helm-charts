@@ -14,16 +14,9 @@ metadata:
     nginx.ingress.kubernetes.io/auth-tls-verify-client: "on"
     nginx.ingress.kubernetes.io/auth-tls-pass-certificate-to-upstream: "false"
     {{- end }}
-    # {{- if .Values.ingress.web.useFastlyIP.enabled }}
-    nginx.ingress.kubernetes.io/whitelist-source-range: 23.235.32.0/20,43.249.72.0/22,103.244.50.0/24,103.245.222.0/23,103.245.224.0/24,104.156.80.0/20,140.248.64.0/18,140.248.128.0/17,146.75.0.0/17,151.101.0.0/16,157.52.64.0/18,167.82.0.0/17,167.82.128.0/20,167.82.160.0/20,167.82.224.0/20,172.111.64.0/18,185.31.16.0/22,199.27.72.0/21,199.232.0.0/16,2a04:4e40::/32,2a04:4e42::/32
-    nginx.ingress.kubernetes.io/configuration-snippet: |
-        set $new_client_ip $remote_addr;
-        if ($http_fastly_client_ip != "") {
-          set $new_client_ip $http_fastly_client_ip;
-        }
-        proxy_set_header X-Real-IP $new_client_ip;
-        proxy_set_header X-Forwarded-For $new_client_ip;
-    # {{- end -}}
+    {{- if .Values.ingress.web.annotations }}
+    {{- toYaml .Values.ingress.web.annotations | nindent 4 }}
+    {{- end }}
   labels:
     {{- include "mastodon.labels" . | nindent 4 }}
   name: {{ $fullName }}-web

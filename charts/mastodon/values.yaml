@@ -28,33 +28,33 @@ securityContext:
 
 configuration:
   database:
-    host: tootcommunity-pgbouncer.tootcommunity.svc.cluster.local
-    name: app
+    host: db.pooler-hostname
+    name: db.name
     poolsize: 25
     port: 6432
     dbMigrations: # to circumvent pgpooler
       port: 5432
       name: app
-      host: dbs-toot-community-1.private.toot.community
+      host: db.hostname
     sslmode: require
     runDatabaseMigrations: true
   databaseReplicas:
     enabled: false
-    host: private-db-postgresql-ams3-toot-community-ro-0-do-user-924064-0.b.db.ondigitalocean.com
+    host: db.read-only-hostname
     port: 5432
   defaultLocale: en
   localDomain: toot.community
-  allowedPrivateAddresses: 10.245.0.0/16
+  allowedPrivateAddresses: 10.0.0.0/8
   redis:
-    host: dbs-toot-community-1.private.toot.community
+    host: redis.hostname
     port: 6379
     database: 0
   s3:
     aliasHost: static.toot.community
     bucket: static-toot-community
-    endpoint: https://ams3.digitaloceanspaces.com
-    hostname: ams3.digitaloceanspaces.com
-    region: ams3
+    endpoint: https://endpoint.of.s3
+    hostname: hostname.of.s3
+    region: region
     protocol: https
     timeouts:
       open: 10
@@ -66,19 +66,19 @@ configuration:
     enableStarttlsAuto: true
     opensslVerifyMode: none
     port: 587
-    domain: ses.toot.community
-    fromAddress: toot.community Notifications <notifications@ses.toot.community>
-    smtpServer: email-smtp.eu-west-1.amazonaws.com
+    domain: toot.community
+    fromAddress: toot.community Notifications <notifications@toot.community>
+    smtpServer: smtp.server
   search:
     enabled: true
-    host: tootcommunity-search-es-http
+    host: elasticsearch.hostname
     port: 9200
     scheme: http
     preset: single_node_cluster # https://github.com/mastodon/documentation/pull/1279/files
     user: elastic
     password:
       secretKeyRef:
-        name: tootcommunity-search-es-elastic-user
+        name: tootcommunity-search-elastic-user
         key: elastic
 
 web:
@@ -161,7 +161,7 @@ streaming:
     scheme: http
   annotations: ~
   redis:
-    url: redis://dbs-toot-community-1.private.toot.community:6379
+    url: redis://redis.hostname:6379
   baseURL: wss://streaming.toot.community
 
 sidekiq:
@@ -249,6 +249,7 @@ ingress:
     upstreamProxyTimeout: 120
     ingressClassName: nginx
     host: toot.community
+    annotations: ~
     verifyClient:
       enabled: true
       secretName: tootcommunity/tootcommunity-ca-secret
@@ -259,14 +260,14 @@ ingress:
   streaming:
     host: streaming.toot.community
     ingressClassName: nginx
+    annotations: ~
     tls:
       - hosts:
           - streaming.toot.community
         secretName: streaming.toot.community-tls
 
 jobs:
-  annotations:
-    linkerd.io/inject: disabled
+  annotations: ~
   cleanupMedia:
     enabled: true
     schedule: "0 5 * * *" # every day at 5am
@@ -297,27 +298,6 @@ jobs:
         memory: 721M
       limits:
         memory: 721M
-  psqlBackup:
-    enabled: false
-    schedule: "0 3 * * *"
-    s3:
-      endpoint: https://ams3.digitaloceanspaces.com
-      bucket: db-backup-toot-community
-    resources:
-      requests:
-        cpu: 1000m # compression-heavy workload
-    postgresImage:
-      repository: postgres
-      tag: 15-alpine
-      pullPolicy: IfNotPresent
-    overrideDatabaseInfo: # to bypass the pool
-      name: app
-      port: 5432
-      host: dbs-toot-community-1.private.toot.community
-    awsCliImage:
-      repository: amazon/aws-cli
-      tag: latest
-      pullPolicy: IfNotPresent
   accountsPrune:
     enabled: true
     schedule: "0 2 * * 1" # every monday at 2am
