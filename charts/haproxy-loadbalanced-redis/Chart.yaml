@@ -9,8 +9,8 @@ maintainers:
 dependencies:
   - name: haproxy
     repository: https://haproxytech.github.io/helm-charts
-    version: 1.19.3
+    version: ~1.19.3
     condition: haproxy.enabled
   - name: redis
-    version: 18.6.1
+    version: ~18.6.1
     repository: https://charts.bitnami.com/bitnami
