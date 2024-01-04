@@ -1,0 +1,46 @@
+apiVersion: v1
+entries:
+  aoderelay:
+  - apiVersion: v2
+    appVersion: 0.3.105"
+    created: "2024-01-04T08:50:23.029942022Z"
+    description: A Helm chart for running AodeRelay, a Mastodon relay server
+    digest: bb76e64d820f158df0923508fbd35a70d193b9bc9d619939a72cc32d0fb22d26
+    name: aoderelay
+    type: application
+    urls:
+    - https://github.com/toot-community/helm-charts/releases/download/aoderelay-1.1.1/aoderelay-1.1.1.tgz
+    version: 1.1.1
+  haproxy-loadbalanced-redis:
+  - apiVersion: v2
+    created: "2024-01-04T08:50:23.265191481Z"
+    dependencies:
+    - condition: haproxy.enabled
+      name: haproxy
+      repository: https://haproxytech.github.io/helm-charts
+      version: ~1.19.3
+    - name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: ~18.6.1
+    description: A Helm chart for running a loadbalanced Redis cluster with HAProxy
+    digest: e1ec7044d3eff30781700e1f6454a4b3b601a6c37d3ef114bd5f59ab35b5e040
+    maintainers:
+    - email: jorijn@jorijn.com
+      name: Jorijn Schrijvershof
+    name: haproxy-loadbalanced-redis
+    type: application
+    urls:
+    - https://github.com/toot-community/helm-charts/releases/download/haproxy-loadbalanced-redis-1.0.3/haproxy-loadbalanced-redis-1.0.3.tgz
+    version: 1.0.3
+  mastodon:
+  - apiVersion: v2
+    appVersion: 4.2.3
+    created: "2024-01-04T08:50:23.457391177Z"
+    description: The toot.community Helm chart for running Mastodon
+    digest: c302f6ca50c3e96c9eea0c0ef01db18601f76361bddd35b07ec433241dd3baea
+    name: mastodon
+    type: application
+    urls:
+    - https://github.com/toot-community/helm-charts/releases/download/mastodon-1.1.1/mastodon-1.1.1.tgz
+    version: 1.1.1
+generated: "2024-01-04T08:50:23.457400635Z"
