@@ -1,8 +1,8 @@
 apiVersion: v2
 name: haproxy-loadbalanced-redis
-description: A Helm chart for Kubernetes
+description: A Helm chart for running a loadbalanced Redis cluster with HAProxy
 type: application
-version: 1.0.2
+version: 1.0.3
 maintainers:
   - name: Jorijn Schrijvershof
     email: jorijn@jorijn.com
