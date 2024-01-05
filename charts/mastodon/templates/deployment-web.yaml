@@ -33,7 +33,6 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      priorityClassName: {{ include "mastodon.fullname" . }}-high-priority
       containers:
         - command:
             - bundle
