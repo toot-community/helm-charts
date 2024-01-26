@@ -33,6 +33,26 @@ entries:
     version: 1.1.1
   haproxy-loadbalanced-redis:
   - apiVersion: v2
+    created: "2024-01-26T17:40:44.087926348Z"
+    dependencies:
+    - condition: haproxy.enabled
+      name: haproxy
+      repository: https://haproxytech.github.io/helm-charts
+      version: ~1.20.0
+    - name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 18.9.0
+    description: A Helm chart for running a loadbalanced Redis cluster with HAProxy
+    digest: 2fdbc758d266ab4007b2b7e47bf62cba3c519b6a3b76d71ae3240ff309fccd5c
+    maintainers:
+    - email: jorijn@jorijn.com
+      name: Jorijn Schrijvershof
+    name: haproxy-loadbalanced-redis
+    type: application
+    urls:
+    - https://github.com/toot-community/helm-charts/releases/download/haproxy-loadbalanced-redis-1.0.10/haproxy-loadbalanced-redis-1.0.10.tgz
+    version: 1.0.10
+  - apiVersion: v2
     created: "2024-01-26T14:36:18.400098693Z"
     dependencies:
     - condition: haproxy.enabled
@@ -203,4 +223,4 @@ entries:
     urls:
     - https://github.com/toot-community/helm-charts/releases/download/mastodon-1.1.1/mastodon-1.1.1.tgz
     version: 1.1.1
-generated: "2024-01-26T14:36:18.40012392Z"
+generated: "2024-01-26T17:40:44.087953268Z"
