@@ -3,7 +3,7 @@ replicaCount: 1
 image:
   repository: asonix/relay
   pullPolicy: IfNotPresent
-  tag: "0.3.105"
+  tag: "0.3.106@sha256:9c9b2be977caa1352c8e8f9a119124a8f57b027e294c3d22fee2f68cfab06076"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -17,15 +17,15 @@ serviceAccount:
 podAnnotations: {}
 
 podSecurityContext:
-   fsGroup: 991
+  fsGroup: 991
 
 securityContext:
-   capabilities:
-     drop:
-     - ALL
-   readOnlyRootFilesystem: true
-   runAsNonRoot: true
-   runAsUser: 991
+  capabilities:
+    drop:
+      - ALL
+  readOnlyRootFilesystem: true
+  runAsNonRoot: true
+  runAsUser: 991
 
 service:
   type: ClusterIP
@@ -71,7 +71,8 @@ aoderelay:
   publishBlocks: true
   sledPath: /database
   rustLog: warn
-  footerBlurb: "Contact <a href=\"https://toot.community/@jorijn\">@jorijn</a> for inquiries"
+  footerBlurb:
+    'Contact <a href="https://toot.community/@jorijn">@jorijn</a> for inquiries'
   localDomains: toot.community
   localBlurb: "<p>Private relay. Contact me to get added.</p>"
 
@@ -79,4 +80,3 @@ aoderelay:
     enabled: true
     address: 0.0.0.0
     port: 9000
-
