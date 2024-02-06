@@ -10,5 +10,29 @@
       "matchUpdateTypes": ["major"],
       "bumpVersion": "minor"
     }
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "description": "Update mastodon docker image references",
+      "fileMatch": ["^charts\\/mastodon\\/Chart\\.yaml$"],
+      "matchStrings": [
+        "appVersion: '(?<currentValue>.*?)'\\s+",
+        "version: '(?<currentValue>.*?)'\\s+"
+      ],
+      "depNameTemplate": "ghcr.io/mastodon/mastodon",
+      "datasourceTemplate": "docker"
+    },
+    {
+      "customType": "regex",
+      "description": "Update aoderelay docker image references",
+      "fileMatch": ["^charts\\/aoderelay\\/Chart\\.yaml$"],
+      "matchStrings": [
+        "appVersion: '(?<currentValue>.*?)'\\s+",
+        "version: '(?<currentValue>.*?)'\\s+"
+      ],
+      "depNameTemplate": "asonix/relay",
+      "datasourceTemplate": "docker"
+    }
   ]
 }
