@@ -31,7 +31,37 @@ entries:
     urls:
     - https://github.com/toot-community/helm-charts/releases/download/aoderelay-1.1.1/aoderelay-1.1.1.tgz
     version: 1.1.1
+  - apiVersion: v2
+    appVersion: 0.3.106
+    created: "2024-02-15T05:11:33.861018067Z"
+    description: A Helm chart for running AodeRelay, a Mastodon relay server
+    digest: 77f058677afe0d6b7e47e720386c9387d1e80ce7618f5fe37126b15a6f6967e1
+    name: aoderelay
+    type: application
+    urls:
+    - https://github.com/toot-community/helm-charts/releases/download/aoderelay-0.3.106/aoderelay-0.3.106.tgz
+    version: 0.3.106
   haproxy-loadbalanced-redis:
+  - apiVersion: v2
+    created: "2024-02-15T05:11:33.962394191Z"
+    dependencies:
+    - condition: haproxy.enabled
+      name: haproxy
+      repository: https://haproxytech.github.io/helm-charts
+      version: ~1.20.0
+    - name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 18.13.0
+    description: A Helm chart for running a loadbalanced Redis cluster with HAProxy
+    digest: 46670cb6030562a6548dee5b81206265d6cee42adf5d6388a689512c1c7f259a
+    maintainers:
+    - email: jorijn@jorijn.com
+      name: Jorijn Schrijvershof
+    name: haproxy-loadbalanced-redis
+    type: application
+    urls:
+    - https://github.com/toot-community/helm-charts/releases/download/haproxy-loadbalanced-redis-1.0.15/haproxy-loadbalanced-redis-1.0.15.tgz
+    version: 1.0.15
   - apiVersion: v2
     created: "2024-01-30T19:32:08.209389322Z"
     dependencies:
@@ -235,6 +265,16 @@ entries:
   mastodon:
   - apiVersion: v2
     appVersion: 4.2.4
+    created: "2024-02-15T05:11:34.071617528Z"
+    description: The toot.community Helm chart for running Mastodon
+    digest: 460707723212bab273ca715e7b2572910270def1d99f8ddb9a22916ed676cccc
+    name: mastodon
+    type: application
+    urls:
+    - https://github.com/toot-community/helm-charts/releases/download/mastodon-4.2.4/mastodon-4.2.4.tgz
+    version: 4.2.4
+  - apiVersion: v2
+    appVersion: 4.2.4
     created: "2024-01-24T18:23:25.902701962Z"
     description: The toot.community Helm chart for running Mastodon
     digest: 2ef10d9cb520ae20d3495aab3e3c4af8c766f8e69529a77984121bfdf647d236
@@ -263,4 +303,4 @@ entries:
     urls:
     - https://github.com/toot-community/helm-charts/releases/download/mastodon-1.1.1/mastodon-1.1.1.tgz
     version: 1.1.1
-generated: "2024-01-30T19:32:08.20943681Z"
+generated: "2024-02-15T05:11:34.071685695Z"
