@@ -32,6 +32,16 @@ entries:
     - https://github.com/toot-community/helm-charts/releases/download/aoderelay-1.1.1/aoderelay-1.1.1.tgz
     version: 1.1.1
   - apiVersion: v2
+    appVersion: 0.3.109
+    created: "2024-02-15T05:18:12.538526019Z"
+    description: A Helm chart for running AodeRelay, a Mastodon relay server
+    digest: 4eef230a947e59ee97fbb49462679017fcf4e630f616c5c14e93a0bd8def605e
+    name: aoderelay
+    type: application
+    urls:
+    - https://github.com/toot-community/helm-charts/releases/download/aoderelay-0.3.109/aoderelay-0.3.109.tgz
+    version: 0.3.109
+  - apiVersion: v2
     appVersion: 0.3.106
     created: "2024-02-15T05:11:33.861018067Z"
     description: A Helm chart for running AodeRelay, a Mastodon relay server
@@ -313,4 +323,4 @@ entries:
     urls:
     - https://github.com/toot-community/helm-charts/releases/download/mastodon-1.1.1/mastodon-1.1.1.tgz
     version: 1.1.1
-generated: "2024-02-15T05:17:53.465173832Z"
+generated: "2024-02-15T05:18:12.538580853Z"
