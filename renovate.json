@@ -17,8 +17,8 @@
       "description": "Update mastodon docker image references",
       "fileMatch": ["^charts\\/mastodon\\/Chart\\.yaml$"],
       "matchStrings": [
-        "appVersion: '(?<currentValue>.*?)'\\s+",
-        "version: '(?<currentValue>.*?)'\\s+"
+        "appVersion: (?<currentValue>.*?)\\s+",
+        "version: (?<currentValue>.*?)\\s+"
       ],
       "depNameTemplate": "ghcr.io/mastodon/mastodon",
       "datasourceTemplate": "docker"
@@ -28,8 +28,8 @@
       "description": "Update aoderelay docker image references",
       "fileMatch": ["^charts\\/aoderelay\\/Chart\\.yaml$"],
       "matchStrings": [
-        "appVersion: '(?<currentValue>.*?)'\\s+",
-        "version: '(?<currentValue>.*?)'\\s+"
+        "appVersion: (?<currentValue>.*?)\\s+",
+        "version: (?<currentValue>.*?)\\s+"
       ],
       "depNameTemplate": "asonix/relay",
       "datasourceTemplate": "docker"

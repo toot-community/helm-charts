@@ -3,4 +3,4 @@ name: mastodon
 description: The toot.community Helm chart for running Mastodon
 type: application
 version: 4.2.4
-appVersion: "4.2.4"
+appVersion: 4.2.4
