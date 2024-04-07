@@ -2,5 +2,5 @@ apiVersion: v2
 name: aoderelay
 description: A Helm chart for running AodeRelay, a Mastodon relay server
 type: application
-version: 0.3.109
-appVersion: 0.3.109
+version: 0.3.111
+appVersion: 0.3.111
