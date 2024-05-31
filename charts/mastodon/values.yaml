@@ -1,7 +1,7 @@
 image:
   repository: ghcr.io/mastodon/mastodon
   pullPolicy: IfNotPresent
-  tag: "v4.2.8@sha256:964a77c5f4b8e5ace172b2ed8f8513a58d589fe5f3adf8361516d2063889ef14"
+  tag: "v4.2.9@sha256:a3afa472feb2db734a076bfddbde15f19cd5e115b55464baa5d5f6c899ab4cec"
 
 imagePullSecrets: []
 nameOverride: ""
