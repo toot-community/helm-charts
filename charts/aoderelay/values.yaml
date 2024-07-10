@@ -3,7 +3,7 @@ replicaCount: 1
 image:
   repository: asonix/relay
   pullPolicy: IfNotPresent
-  tag: "0.3.111@sha256:9b827a43e1f3cb6814fa1180f668b8dd7254b717ab1306626038dd283917e29b"
+  tag: "0.3.115@sha256:613f8f6844a7adfc2b5b3fa0dd027baa72e52e8d874494222604f6fd6d871691"
 
 imagePullSecrets: []
 nameOverride: ""
