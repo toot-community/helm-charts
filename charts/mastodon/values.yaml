@@ -122,6 +122,10 @@ translations:
     plan: free
 
 streaming:
+  image:
+    repository: ghcr.io/mastodon/mastodon-streaming
+    pullPolicy: IfNotPresent
+    tag: v4.3.0@sha256:b5f8775468885ad1663d3310085c7ae2cd8218954236c8398996f97e38427b8b
   replicaCount: 4
   strategy:
     rollingUpdate:
