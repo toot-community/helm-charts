@@ -62,8 +62,8 @@ spec:
           envFrom:
             - configMapRef:
                 name: {{ include "mastodon.fullname" . }}-env
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          image: "{{ .Values.streaming.image.repository }}:{{ .Values.streaming.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.streaming.image.pullPolicy }}
           name: streaming
           ports:
             - containerPort: 4000

@@ -1,7 +1,7 @@
 image:
   repository: ghcr.io/mastodon/mastodon
   pullPolicy: IfNotPresent
-  tag: "v4.2.10@sha256:b00295566cf673787147cb039581d07acfc4d4f5a81c881787ba3cb2946ec93c"
+  tag: "v4.3.0@sha256:c0a8db60738add0682ddb9f7fcccceb05cc8bedbeb2d43fccdb8af6619922a7e"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -122,6 +122,10 @@ translations:
     plan: free
 
 streaming:
+  image:
+    repository: ghcr.io/mastodon/mastodon-streaming
+    pullPolicy: IfNotPresent
+    tag: v4.3.0@sha256:b5f8775468885ad1663d3310085c7ae2cd8218954236c8398996f97e38427b8b
   replicaCount: 4
   strategy:
     rollingUpdate:
