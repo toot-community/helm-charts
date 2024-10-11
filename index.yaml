@@ -344,6 +344,16 @@ entries:
     version: 1.0.3
   mastodon:
   - apiVersion: v2
+    appVersion: v4.3.0
+    created: "2024-10-11T05:44:25.960912179Z"
+    description: The toot.community Helm chart for running Mastodon
+    digest: c91b036627c961907dc71423f48c7250b2b2a1b0429863798051db0c4d8def4f
+    name: mastodon
+    type: application
+    urls:
+    - https://github.com/toot-community/helm-charts/releases/download/mastodon-v4.3.0/mastodon-v4.3.0.tgz
+    version: v4.3.0
+  - apiVersion: v2
     appVersion: v4.2.10
     created: "2024-07-04T17:57:29.051016684Z"
     description: The toot.community Helm chart for running Mastodon
@@ -433,4 +443,4 @@ entries:
     urls:
     - https://github.com/toot-community/helm-charts/releases/download/mastodon-1.1.1/mastodon-1.1.1.tgz
     version: 1.1.1
-generated: "2024-07-04T17:57:29.051096965Z"
+generated: "2024-10-11T05:44:25.960979855Z"
