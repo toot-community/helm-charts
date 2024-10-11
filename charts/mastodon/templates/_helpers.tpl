@@ -61,3 +61,57 @@ Create the name of the service account to use
 {{- end }}
 {{- end }}
 
+{{/*
+Create the name of the service account to use
+*/}}
+{{- define "mastodon.dbMigrationJobTemplate" -}}
+template:
+    metadata:
+      name: {{ include "mastodon.fullname" . }}-db-migrate
+      {{- with .Values.jobs.annotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: {{ include "mastodon.fullname" . }}-db-migrate
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command:
+            - bundle
+            - exec
+            - rake
+            - db:migrate
+          env:
+            - name: DB_PORT
+              value: {{ .Values.configuration.database.dbMigrations.port | quote }}
+            - name: DB_NAME
+              value: {{ .Values.configuration.database.dbMigrations.name }}
+            - name: DB_HOST
+              value: {{ .Values.configuration.database.dbMigrations.host }}
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  key: {{ .Values.configuration.database.credentials.usernameKey }}
+                  name: {{ .Values.configuration.database.credentials.secretName }}
+            - name: DB_PASS
+              valueFrom:
+                secretKeyRef:
+                  key: {{ .Values.configuration.database.credentials.passwordKey }}
+                  name: {{ .Values.configuration.database.credentials.secretName }}
+            {{- if eq .skipPostMigrations true }}
+            - name: SKIP_POST_DEPLOYMENT_MIGRATIONS
+              value: "true"
+            {{- end }}
+          envFrom:
+            - configMapRef:
+                name: {{ include "mastodon.fullname" . }}-env
+            - secretRef:
+                name: {{ include "mastodon.fullname" . }}-secrets-env
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      serviceAccountName: {{ include "mastodon.serviceAccountName" . }}
+      terminationGracePeriodSeconds: 30
+{{- end }}
+
